@@ -1,9 +1,9 @@
 {
   "name": "Yucata Hotkeys",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Keyboard shortcuts for yucata games",
   "manifest_version": 2,
-  "permissions": ["activeTab", "webNavigation", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "page": "html/background.html"
   },
