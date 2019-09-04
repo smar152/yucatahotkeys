@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Keyboard shortcuts for yucata games",
   "manifest_version": 2,
-  "permissions": ["activeTab", "webNavigation", "declarativeContent", "storage", "*://*/*" ],
+  "permissions": ["activeTab", "webNavigation", "declarativeContent", "storage"],
   "background": {
     "page": "html/background.html"
   },
