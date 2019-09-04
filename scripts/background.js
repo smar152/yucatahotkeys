@@ -17,13 +17,18 @@ addOnInstalledListener(() => {
     });
 });
 
+/**
+ * Setup handler that runs when the page changes
+ * e.g. to enable/disable the page action
+ */
 const handleOnPageChanged = () =>{
     // Add handler that makes this work only on yucata
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
         chrome.declarativeContent.onPageChanged.addRules([{
-            conditions: [new chrome.declarativeContent.PageStateMatcher({
-                pageUrl: {hostEquals: 'yucata.de'},
-            })
+            conditions: [
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: {hostEquals: 'yucata.de'},
+                })
             ],
             actions: [new chrome.declarativeContent.ShowPageAction()]
         }]);
