@@ -23,3 +23,14 @@ export const getStoredValue = (key, callback) => {
         callback(value[key]);
     });
 };
+
+
+/**
+ * Add an on Installed handler
+ * @param {function} method
+ */
+export const addOnInstalledListener = (method) => {
+    chrome.runtime.onInstalled.addListener(() => {
+        method();
+    });
+};
