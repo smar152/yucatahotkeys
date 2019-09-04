@@ -1,2 +1,3 @@
-# yucatahotkeys
-Keyboard shortcuts for yucata
+## yucatahotkeys
+
+Keyboard shortcuts for yucata games
