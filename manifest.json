@@ -1,11 +1,20 @@
 {
   "name": "Yucata Hotkeys",
-  "version": "1.0",
+  "version": "1.0.2",
   "description": "Keyboard shortcuts for yucata games",
   "manifest_version": 2,
+  "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "page": "html/background.html"
   },
+  "content_scripts": [
+    {
+      "matches": ["*://yucata.de/*"],
+      "css": ["css/injected.css"],
+      "js": ["scripts/content.js"],
+      "run_at": "document_end"
+    }
+  ],
   "page_action": {
     "default_popup": "html/popup.html",
     "default_icon": {
@@ -20,6 +29,5 @@
     "32": "images/icon.png",
     "48": "images/icon.png",
     "128": "images/icon.png"
-  },
-  "permissions": ["declarativeContent","storage"]
+  }
 }

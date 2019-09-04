@@ -1,0 +1,8 @@
+/*
+ This CSS will be injected in all yucata.de pages
+*/
+
+html body.page{
+    background: white;
+    background-image: none;
+}
