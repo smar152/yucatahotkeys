@@ -6,5 +6,20 @@
   "background": {
     "page": "html/background.html"
   },
+  "page_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": {
+      "16": "images/icon.png",
+      "32": "images/icon.png",
+      "48": "images/icon.png",
+      "128": "images/icon.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon.png",
+    "32": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
   "permissions": ["storage"]
 }
