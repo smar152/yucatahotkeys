@@ -9,6 +9,7 @@ setupHotkeys();
  */
 function setupHotkeys(){
     console.log("I set up hotkeys!");
+    // Info on hotkeys https://developer.chrome.com/extensions/commands
     // document.body.onkeypress = (e) => {
     //     if(e.key === "a"){
     //         console.log("You clicked A!");
