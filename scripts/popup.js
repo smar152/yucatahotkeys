@@ -6,7 +6,7 @@ init();
  * Initialize this page
  */
 function init() {
-    setupHandlers();
+    // setupHandlers();
 }
 
 /**
