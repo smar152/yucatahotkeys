@@ -6,3 +6,50 @@ html body.page{
     background: white;
     background-image: none;
 }
+
+#page .hotkeyTooltipTrigger{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+#page .hotkeyTooltipTrigger + .tooltipText{
+    visibility: hidden;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    background: white;
+    padding: 20px;
+    z-index: 1000;
+    min-width: 300px;
+}
+
+#page .hotkeyTooltipTrigger:hover + .tooltipText {
+    visibility: visible;
+}
+
+
+.tooltipTextRow{
+    border-bottom: 1px solid #aaaaaa;
+    padding: 5px;
+}
+.tooltipTextRow:last-of-type{
+    border-bottom: 0px;
+}
+
+.tooltipTextlabel{
+    display: inline-block;
+    text-align: left;
+    font-weight: bold;
+    width: 10%;
+}
+
+.tooltipTextValue{
+    display: inline-block;
+    width: 90%;
+}
+
+
+/*
+ Todo - fix image sizes in game list with transform: scale
+*/
