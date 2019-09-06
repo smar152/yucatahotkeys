@@ -13,6 +13,10 @@
       "css": ["css/injected.css"],
       "js": ["scripts/content.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["*://yucata.de/en/Game/MachiKoro/*"],
+      "css": ["css/machi_koro.css"]
     }
   ],
   "page_action": {
