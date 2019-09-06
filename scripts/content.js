@@ -4,22 +4,26 @@
  * Values of the map are objects describing the action containing a description and a method
  */
 const globalHotkeysMap = {
-    "f": {
-        description: "Hit the 'Finish Turn' button",
-        method: () => clickBySelector("#btn_finishTurn")
+    "g": {
+        description: "Hit 'OK' when it's your turn",
+        method: () => clickBySelector(".ui-popup-active input[value='OK']")
+    },
+    "u": {
+        description: "Hit 'Undo' button",
+        method: () => clickBySelector("#btn_undo")
     },
     "p": {
         description: "Hit the 'Pass' button",
         method: () => clickBySelector("#btn_BtnPassBuy")
     },
+    "f": {
+        description: "Hit the 'Finish Turn' button",
+        method: () => clickBySelector("#btn_finishTurn")
+    },
     "n": {
         description: "Hit the 'Next Game' button",
         method: () => clickBySelector("#btn_nextGame")
-    },
-    "g": {
-        description: "Hit 'OK' when it's your turn",
-        method: () => clickBySelector(".ui-popup-active input[value='OK']")
-    },
+    }
 };
 
 /**
@@ -61,6 +65,22 @@ const machiKoroHotkeysMap = {
     "9": {
         description: "Buy Card in Slot 9 (Machi Koro)",
         method: () => clickBySelector("#card9")
+    },
+    "d": {
+        description: "Toggle Dice",
+        method: () => clickBySelector("#die2")
+    },
+    "r": {
+        description: "Hit 'Roll dice' button",
+        method: () => clickBySelector("#btn_Würfeln")
+    },
+    "q": {
+        description: "Hit 'Reroll dice' button",
+        method: () => clickBySelector("#btn_BtnRollAgain")
+    },
+    "w": {
+        description: "Hit 'Do Not Reroll' button",
+        method: () => clickBySelector("#btn_BtnRollNotAgain")
     }
 };
 
@@ -68,8 +88,8 @@ const machiKoroHotkeysMap = {
  * All of the hotkeys combined
  */
 const hotkeysMap = {
-  ...globalHotkeysMap,
   ...machiKoroHotkeysMap,
+  ...globalHotkeysMap,
 };
 
 setupHotkeys();
