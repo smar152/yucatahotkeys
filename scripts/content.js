@@ -20,6 +20,10 @@ const globalHotkeysMap = {
         description: "Hit 'OK' when it's your turn",
         method: () => clickBySelector(".ui-popup-active input[value='OK']")
     },
+    "u": {
+            description: "Hit 'Undo' button",
+            method: () => clickBySelector("#btn_undo")
+        }
 };
 
 /**
