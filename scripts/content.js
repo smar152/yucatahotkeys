@@ -15,7 +15,11 @@ const globalHotkeysMap = {
     "n": {
         description: "Hit the 'Next Game' button",
         method: () => clickBySelector("#btn_nextGame")
-    }
+    },
+    "g": {
+        description: "Hit 'OK' when it's your turn",
+        method: () => clickBySelector(".ui-popup-active input[value='OK']")
+    },
 };
 
 /**
@@ -23,39 +27,39 @@ const globalHotkeysMap = {
  */
 const machiKoroHotkeysMap = {
     "1": {
-        description: "Buy Card 1 (Machi Koro)",
+        description: "Buy Card in Slot 1 (Machi Koro)",
         method: () => clickBySelector("#card1")
     },
     "2": {
-        description: "Buy Card 2 (Machi Koro)",
+        description: "Buy Card in Slot 2 (Machi Koro)",
         method: () => clickBySelector("#card2")
     },
     "3": {
-        description: "Buy Card 3 (Machi Koro)",
+        description: "Buy Card in Slot 3 (Machi Koro)",
         method: () => clickBySelector("#card3")
     },
     "4": {
-        description: "Buy Card 4 (Machi Koro)",
+        description: "Buy Card in Slot 4 (Machi Koro)",
         method: () => clickBySelector("#card4")
     },
     "5": {
-        description: "Buy Card 5 (Machi Koro)",
+        description: "Buy Card in Slot 5 (Machi Koro)",
         method: () => clickBySelector("#card5")
     },
     "6": {
-        description: "Buy Card 6 (Machi Koro)",
+        description: "Buy Card in Slot 6 (Machi Koro)",
         method: () => clickBySelector("#card6")
     },
     "7": {
-        description: "Buy Card 7 (Machi Koro)",
+        description: "Buy Card in Slot 7 (Machi Koro)",
         method: () => clickBySelector("#card7")
     },
     "8": {
-        description: "Buy Card 8 (Machi Koro)",
+        description: "Buy Card in Slot 8 (Machi Koro)",
         method: () => clickBySelector("#card8")
     },
     "9": {
-        description: "Buy Card 9 (Machi Koro)",
+        description: "Buy Card in Slot 9 (Machi Koro)",
         method: () => clickBySelector("#card9")
     }
 };
