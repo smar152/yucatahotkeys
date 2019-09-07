@@ -81,6 +81,22 @@ const machiKoroHotkeysMap = {
     "w": {
         description: "Hit 'Do Not Reroll' button",
         method: () => clickBySelector("#btn_BtnRollNotAgain")
+    },
+    "ArrowLeft": {
+        description: "Select Left Card",
+        method: () => selectNextCard()
+    },
+    "ArrowRight": {
+        description: "Select Right Card",
+        method: () => selectNextCard()
+    },
+    "ArrowUp": {
+        description: "Select Top Card",
+        method: () => selectNextCard()
+    },
+    "ArrowDown": {
+        description: "Select Bottom Card",
+        method: () => selectNextCard()
     }
 };
 
@@ -94,6 +110,7 @@ const hotkeysMap = {
 
 setupHotkeys();
 waitForBoardToExistAndThen(addTooltip);
+waitForBoardToExistAndThen(method: ()=> makeActiveBySelector("#card1"));
 
 /**
  * Wait for the board DOM element to exist, and then execute the method passed
@@ -155,7 +172,7 @@ function setupHotkeys(){
     // For each key defined in the map (what is pressed on the keyboard)
     Object.keys(hotkeysMap).forEach(key => {
         // Attach an keypress event listener to the window object
-        window.addEventListener("keypress", (e) => {
+        window.addEventListener("keydown", (e) => {
             // If the key in the event matches the key we are setting up the handler for
             if(e.key === key){
                 const data = hotkeysMap[key];
@@ -182,3 +199,29 @@ function clickBySelector(selector){
         console.log(`Element ${selector} not found`);
     }
 }
+
+function makeActiveBySelector(selector){
+    const element = document.querySelector(selector);
+    if(element){
+        element.classList.add("selectedCard");
+        const activeElement = document.querySelector( selectors: ".selectedCard");
+        if(activeElement){
+            activeElement.classList.remove( tokens: "selectedCard" );
+        }
+    } else {
+        console.log(`Element ${selector} not found`);
+    }
+}
+
+function selectNextCard(){
+    makeActiveBySelector("#card1");
+    /*const element = document.querySelector(selector);
+    if(element){
+        element.click();
+    } else {
+        console.log(`Element ${selector} not found`);
+    }*/
+}
+
+
+
