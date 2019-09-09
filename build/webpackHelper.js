@@ -169,6 +169,7 @@ export function getHTMLPlugins(environment){
  */
 export function getPlugins(environment){
     const plugins =  [
+        new webpack.SourceMapDevToolPlugin({}),
         ...getCopyPlugins(environment),
         ...getHTMLPlugins(environment),
         ...getCSSPlugins(environment)

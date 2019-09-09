@@ -5,8 +5,8 @@ import {getPlugins, getEntryPoints, getOutputData, getRules} from './webpackHelp
 const environment = "PROD";
 
 let config = {
-    devtool: 'inline-source-map', // Source map settings - does not impact production as source maps are only downloaded when a user opens dev tools
     mode: 'production',
+    devtool: 'none', // Source map settings - does not impact production as source maps are only downloaded when a user opens dev tools
     entry: getEntryPoints(environment),
     target: 'web', // You can use "node" or "electron" here
     output: getOutputData(environment),
