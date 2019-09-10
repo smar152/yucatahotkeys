@@ -1,6 +1,6 @@
 {
     "name": "yucata-hotkeys",
-    "version": "1.0.1",
+    "version": "1.0.4",
     "description": "Yucata Hotkeys Extension for chrome",
     "main": "index.js",
     "browserslist": "last 3 versions",
@@ -26,7 +26,9 @@
         "lint:watch": "npm run lint -- --watch",
         "generateMockData": "babel-node buildScripts/generateMockData.js",
         "prestart-mockapi": "npm run generateMockData",
-        "start-mockapi": "json-server --watch src/api/db.json --port 3001"
+        "start-mockapi": "json-server --watch src/api/db.json --port 3001",
+        "prezip": "npm-run-all lint build",
+        "zip": "zip -r ../yukata_hotkeys.zip dist"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.10.2",
