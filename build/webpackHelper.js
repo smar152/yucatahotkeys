@@ -53,7 +53,7 @@ export function getEntryPoints(environment){
             ppath('src/scripts/popup')
         ],
         machi_koro: [
-            ppath('src/scripts/machi_koro')
+            ppath('src/scripts/hotkeys/machi_koro')
         ],
         injected: [
             ppath('src/scripts/injected')
