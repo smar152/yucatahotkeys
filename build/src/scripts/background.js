@@ -33,6 +33,6 @@ function handleOnPageChanged(){
             actions: [new chrome.declarativeContent.ShowPageAction()]
         }]);
     });
-};
+}
 
 

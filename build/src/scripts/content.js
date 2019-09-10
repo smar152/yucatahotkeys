@@ -4,23 +4,28 @@
  * Values of the map are objects describing the action containing a description and a method
  */
 const globalHotkeysMap = {
-    "g": {
+    "global_ok": {
+        keyCombos: ["g"],
         description: "Hit 'OK' when it's your turn",
         method: () => clickBySelector(".ui-popup-active input[value='OK']")
     },
-    "u": {
+    "global_undo": {
+        keyCombos: ["u"],
         description: "Hit 'Undo' button",
         method: () => clickBySelector("#btn_undo")
     },
-    "p": {
+    "global_pass": {
+        keyCombos: ["p"],
         description: "Hit the 'Pass' button",
         method: () => clickBySelector("#btn_BtnPassBuy")
     },
-    "f": {
+    "global_finish": {
+        keyCombos: ["f"],
         description: "Hit the 'Finish Turn' button",
         method: () => clickBySelector("#btn_finishTurn")
     },
-    "n": {
+    "global_next_game": {
+        keyCombos: ["n"],
         description: "Hit the 'Next Game' button",
         method: () => clickBySelector("#btn_nextGame")
     }
@@ -30,79 +35,96 @@ const globalHotkeysMap = {
  * Hotkey map for machi koro only
  */
 const machiKoroHotkeysMap = {
-    "1": {
+    "machi_koro_buy_slot_1": {
+        keyCombos: ["1"],
         description: "Buy Card in Slot 1 (Machi Koro)",
         method: () => clickBySelector("#card1")
     },
-    "2": {
+    "machi_koro_buy_slot_2": {
+        keyCombos: ["2"],
         description: "Buy Card in Slot 2 (Machi Koro)",
         method: () => clickBySelector("#card2")
     },
-    "3": {
+    "machi_koro_buy_slot_3": {
+        keyCombos: ["3"],
         description: "Buy Card in Slot 3 (Machi Koro)",
         method: () => clickBySelector("#card3")
     },
-    "4": {
+    "machi_koro_buy_slot_4": {
+        keyCombos: ["4"],
         description: "Buy Card in Slot 4 (Machi Koro)",
         method: () => clickBySelector("#card4")
     },
-    "5": {
+    "machi_koro_buy_slot_5": {
+        keyCombos: ["5"],
         description: "Buy Card in Slot 5 (Machi Koro)",
         method: () => clickBySelector("#card5")
     },
-    "6": {
+    "machi_koro_buy_slot_6": {
+        keyCombos: ["6"],
         description: "Buy Card in Slot 6 (Machi Koro)",
         method: () => clickBySelector("#card6")
     },
-    "7": {
+    "machi_koro_buy_slot_7": {
+        keyCombos: ["7"],
         description: "Buy Card in Slot 7 (Machi Koro)",
         method: () => clickBySelector("#card7")
     },
-    "8": {
+    "machi_koro_buy_slot_8": {
+        keyCombos: ["8"],
         description: "Buy Card in Slot 8 (Machi Koro)",
         method: () => clickBySelector("#card8")
     },
-    "9": {
+    "machi_koro_buy_slot_9": {
+        keyCombos: ["9"],
         description: "Buy Card in Slot 9 (Machi Koro)",
         method: () => clickBySelector("#card9")
     },
-    "d": {
+    "machi_koro_toggle_dice": {
+        keyCombos: ["d"],
         description: "Toggle Dice",
         method: () => clickBySelector("#die2")
     },
-    "r": {
+    "machi_koro_roll_dice": {
+        keyCombos: ["r"],
         description: "Hit 'Roll dice' button",
         method: () => clickBySelector("#btn_Würfeln")
     },
-    "q": {
+    "machi_koro_reroll_dice": {
+        keyCombos: ["q"],
         description: "Hit 'Reroll dice' button",
         method: () => clickBySelector("#btn_BtnRollAgain")
     },
-    "w": {
+    "machi_koro_do_not_reroll_dice": {
+        keyCombos: ["w"],
         description: "Hit 'Do Not Reroll' button",
         method: () => clickBySelector("#btn_BtnRollNotAgain")
     },
-    "ArrowLeft": {
+    "machi_koro_select_card_left": {
+        keyCombos: ["ArrowLeft"],
         description: "Select Left Card",
         method: () => selectCardLeft()
     },
-    "ArrowRight": {
+    "machi_koro_select_card_right": {
+        keyCombos: ["ArrowRight"],
         description: "Select Right Card",
         method: () => selectCardRight()
     },
-    "ArrowUp": {
+    "machi_koro_select_card_up": {
+        keyCombos: ["ArrowUp"],
         description: "Select Top Card",
         method: () => selectCardUp()
     },
-    "ArrowDown": {
+    "machi_koro_select_card_down": {
+        keyCombos: ["ArrowDown"],
         description: "Select Bottom Card",
         method: () => selectCardDown()
     },
-    "Enter": {
+    "machi_koro_buy_selected_card": {
+        keyCombos: ["Enter"],
         description: "Buy Selected Card",
         method: () => buySelectedCard()
     }
-
 };
 
 /**
@@ -115,7 +137,7 @@ const hotkeysMap = {
 
 setupHotkeys();
 waitForBoardToExistAndThen(addTooltip);
-waitForBoardToExistAndThen( ()=> makeActiveBySelector("#card1"));
+waitForBoardToExistAndThen(()=> makeActiveBySelector("#card1"));
 
 /**
  * Wait for the board DOM element to exist, and then execute the method passed
@@ -174,21 +196,24 @@ function addTooltip(){
  */
 function setupHotkeys(){
     console.log("Custom Yucata hotkeys added.");
-    // For each key defined in the map (what is pressed on the keyboard)
-    Object.keys(hotkeysMap).forEach(key => {
-        // Attach an keypress event listener to the window object
-        window.addEventListener("keydown", (e) => {
-            // If the key in the event matches the key we are setting up the handler for
-            if(e.key === key){
-                const data = hotkeysMap[key];
-                // If we have a binding for this hotkey
-                if(data){
-                    const {description, method} = data;
-                    console.log(`Action: ${description}`);
-                    method();
-                }
-            }
-        });
+    // For each key defined in the map (unique action name)
+    Object.keys(hotkeysMap).forEach(actionId => {
+        // Get the data object
+        const data = hotkeysMap[actionId];
+        if(data){
+            const {keyCombos, method, description} = data;
+            keyCombos.forEach(key => {
+                // Attach an keypress event listener to the window object
+                window.addEventListener("keydown", (e) => {
+                    // If the key in the event matches the key we are setting up the handler for
+                    if(e.key === key){
+                        // If we have a binding for this hotkey
+                        console.log(`Action: ${description}`);
+                        method();
+                    }
+                });
+            });
+        }
     });
 }
 
@@ -205,18 +230,24 @@ function clickBySelector(selector){
     }
 }
 
+/**
+ * Add the "selectedCard" class to the element matched by the selector (if any)
+ * @param {string} selector
+ */
 function makeActiveBySelector(selector){
     const element = document.querySelector(selector);
     if(element){
+        element.classList.add("selectedCard");
         const activeElement = document.querySelector( ".selectedCard");
         // if(activeElement){
-        //     activeElement.classList.remove( "selectedCard" );
+        //     activeElement.classList.remove("selectedCard" );
         // }
-        element.classList.add("selectedCard");
     } else {
         console.log(`Element ${selector} not found`);
     }
 }
+
+
 
 function selectCardRight(){
     const activeElement = document.querySelector( ".selectedCard");
@@ -315,8 +346,12 @@ function buySelectedCard(){
             else{
                 alert("You can't buy this one :( \nChose an available card.");
             }
-        }        
+        }
     } else {
         console.log(`Element ${activeElement.id} not found`);
     }
 }
+
+
+
+

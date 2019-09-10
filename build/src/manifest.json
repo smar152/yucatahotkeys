@@ -19,6 +19,9 @@
       "css": ["css/machi_koro.css"]
     }
   ],
+  "web_accessible_resources": [
+    "scripts/*.map"
+  ],
   "page_action": {
     "default_popup": "html/popup.html",
     "default_icon": {

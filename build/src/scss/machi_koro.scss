@@ -1,38 +1,38 @@
 /*#page #gameContainer {*/
-    /*width: 100% !important;*/
+/*width: 100% !important;*/
 /*}*/
 
 /*#page .cardArea {*/
-    /*width: 70% !important;*/
+/*width: 70% !important;*/
 /*}*/
 
 /*#page .playerAreas{*/
-    /*width: 30% !important;*/
+/*width: 30% !important;*/
 /*}*/
 
 /*#page .diceArea{*/
-    /*left: 64% !important;*/
+/*left: 64% !important;*/
 /*}*/
 
 /*#page #game .playerInfo .money .value{*/
-    /*font-size: 1.8em !important;*/
+/*font-size: 1.8em !important;*/
 /*}*/
 
 /*#page .logo{*/
-    /*left: 67% !important;*/
-    /*top: 92% !important;*/
+/*left: 67% !important;*/
+/*top: 92% !important;*/
 /*}*/
 
 /*.miniCard{*/
-    /*width: 60% !important;*/
+/*width: 60% !important;*/
 /*}*/
 
 /*#page .diceArea{*/
-    /*position: static;*/
+/*position: static;*/
 /*}*/
 
 /*#page .logo{*/
-    /*position: static;*/
+/*position: static;*/
 /*}*/
 
 #page .move {
@@ -42,6 +42,6 @@
 
 .cardArea .cardContainer.active.selectedCard,
 .cardArea .cardContainer.selectedCard {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  border: 1px solid rgba(81, 203, 238, 1);
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
 }
