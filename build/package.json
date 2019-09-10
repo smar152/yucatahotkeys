@@ -27,8 +27,7 @@
         "generateMockData": "babel-node buildScripts/generateMockData.js",
         "prestart-mockapi": "npm run generateMockData",
         "start-mockapi": "json-server --watch src/api/db.json --port 3001",
-        "prezip": "npm-run-all lint build",
-        "zip": "zip -r ../yukata_hotkeys.zip dist"
+        "zip": "cd dist; zip -r -D ../../yukata_hotkeys.zip ./; cd -"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.10.2",
