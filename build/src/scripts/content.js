@@ -35,13 +35,13 @@ function addTooltip(){
     });
 
     Object.keys(hotkeysMap).forEach(key => {
-       const {description} = hotkeysMap[key];
+       const {keyCombos, description} = hotkeysMap[key];
        const row = Object.assign(document.createElement("div"), {
            className: "tooltipTextRow"
        });
        const labelCell = Object.assign(document.createElement("div"), {
            className: "tooltipTextlabel",
-           textContent: key.toLocaleUpperCase() + ":"
+           textContent: keyCombos[0].toLocaleUpperCase() + ":"
        });
        const valueCell = Object.assign(document.createElement("div"), {
            className: "tooltipTextValue",
