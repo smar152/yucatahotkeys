@@ -33,10 +33,10 @@ const pageList = [
  */
 export function getEntryPoints(environment){
     return {
-        index: [
-            "whatwg-fetch",
-            ppath('src/index')
-        ],
+        // index: [
+        //     "whatwg-fetch",
+        //     ppath('src/index')
+        // ],
         background: [
             ppath('src/scripts/background')
         ],
@@ -129,18 +129,18 @@ export function getHTMLPlugins(environment){
         thisEnvironmentType: "PROD", // This is a custom property available in our html via ejs
         thisSubdirectory: getSubdirectory("PROD"),
         buildTimestamp: new Date(),
-        minify: { // Lots of options for minifying here
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: false,
-            minifyCSS: true,
-            minifyURLs: true
-        }
+        // minify: { // Lots of options for minifying here
+        //     removeComments: true,
+        //     collapseWhitespace: true,
+        //     removeRedundantAttributes: true,
+        //     useShortDoctype: true,
+        //     removeEmptyAttributes: true,
+        //     removeStyleLinkTypeAttributes: true,
+        //     keepClosingSlash: true,
+        //     minifyJS: false,
+        //     minifyCSS: true,
+        //     minifyURLs: true
+        // }
     };
     const devParams = {
         inject: true,
