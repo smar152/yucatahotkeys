@@ -6,6 +6,7 @@ import {clickBySelector, waitForBoardToExistAndThen} from "../dom";
  */
 export function main(){
     waitForBoardToExistAndThen(()=> selectCardBySelector("#card1"));
+    waitForBoardToExistAndThen(addCardTooltips);
 }
 
 /**
@@ -98,7 +99,7 @@ export const machiKoroHotkeysMap = {
         method: () => selectCardDown()
     },
     "machi_koro_buy_selected_card": {
-        keyCombos: ["Enter"],
+        keyCombos: ["b"],
         description: "Buy Selected Card",
         method: () => buySelectedCard()
     }
@@ -117,6 +118,26 @@ export function selectCardBySelector(selector){
             activeElement.classList.remove( "selectedCard" );
         }
     }
+}
+
+/**
+ * Adds card tooltips on hover (zoomed in cards)
+ */
+function addCardTooltips() {
+    const cards = getCardsDom();
+    cards.forEach(card => {
+        const clone = card.querySelector(".card img").cloneNode();
+        clone.classList.add("cardZoomed");
+        card.parentElement.insertBefore(clone, card.nextSibling);
+    })
+}
+
+/**
+ *
+ * @returns {NodeListOf<Element>}
+ */
+function getCardsDom() {
+    return [...document.querySelectorAll(".cardContainer")];
 }
 
 /**

@@ -39,21 +39,48 @@
 $selectedCardBorderColor: rgb(181, 108, 238);
 $selectedDisabledCardBorderColor: #264a2f;
 
-#page .move {
-    height: 500px !important;
-    font-size: 2em !important;
-}
+#page {
+    #gameLog{}
 
-.cardArea{
-    .cardContainer{
-        box-sizing: border-box;
-        &.selectedCard{
-            box-shadow: 0 0 5px $selectedDisabledCardBorderColor;
-            border-color: $selectedDisabledCardBorderColor;
-            &.active{
-                box-shadow: 0 0 5px $selectedCardBorderColor;
-                border-color: $selectedCardBorderColor;
+    .move{
+        min-height: 500px !important;
+        font-size: 2em !important;
+        line-height: 2.5em;
+    }
+
+    .cardArea{
+        .cardContainer{
+            box-sizing: border-box;
+            transition: all ease .5s;
+            filter: sepia(1);
+
+            &.selectedCard{
+                box-shadow: 0 0 5px $selectedDisabledCardBorderColor;
+                border-color: $selectedDisabledCardBorderColor;
             }
+            &.active{
+                filter: none;
+                border-color: transparent;
+                &.selectedCard{
+                    box-shadow: 0 0 5px $selectedCardBorderColor;
+                    border-color: $selectedCardBorderColor;
+                }
+            }
+
+
+        }
+        .cardZoomed{
+            display: none;
+            width: 300px;
+            position: fixed;
+            top:20px;
+            right:20px;
+            filter: sepia(0) !important;
+            z-index: 1000 !important;
+        }
+
+        :hover + .cardZoomed{
+            display: block;
         }
     }
 }
