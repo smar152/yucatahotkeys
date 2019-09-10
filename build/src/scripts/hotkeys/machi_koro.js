@@ -5,7 +5,7 @@ import {clickBySelector, waitForBoardToExistAndThen} from "../dom";
  * Main method to be executed (by content.js)
  */
 export function main(){
-    waitForBoardToExistAndThen(()=> makeActiveBySelector("#card1"));
+    waitForBoardToExistAndThen(()=> selectCardBySelector("#card1"));
 }
 
 /**
@@ -108,19 +108,16 @@ export const machiKoroHotkeysMap = {
  * Add the "selectedCard" class to the element matched by the selector (if any)
  * @param {string} selector
  */
-export function makeActiveBySelector(selector){
-    const element = document.querySelector(selector);
-    if(element){
-        element.classList.add("selectedCard");
-        const activeElement = document.querySelector( ".selectedCard");
-        // if(activeElement){
-        //     activeElement.classList.remove("selectedCard" );
-        // }
-    } else {
-        console.log(`Element ${selector} not found`);
+export function selectCardBySelector(selector){
+    const activeElement = getSelectedCard();
+    const cardElement = document.querySelector(selector);
+    if(cardElement){
+        cardElement.classList.add("selectedCard");
+        if(activeElement){
+            activeElement.classList.remove( "selectedCard" );
+        }
     }
 }
-
 
 /**
  * Return the card that is currently selected (has the class selectedCard)
@@ -128,17 +125,6 @@ export function makeActiveBySelector(selector){
  */
 export function getSelectedCard(){
     return document.querySelector( ".selectedCard");
-}
-
-/**
- * Select a card based on the selector provided
- * Will also un-select a currently selected card
- * @param {string} cardSelector
- */
-export function selectCardBySelector(cardSelector){
-    const activeElement = getSelectedCard();
-    activeElement.classList.remove( "selectedCard" );
-    document.querySelector(cardSelector).classList.add("selectedCard");
 }
 
 /**
@@ -157,13 +143,16 @@ export function selectCardByNumber(cardNumber){
  */
 export function getCardNumber(element){
     const regex = /\d+$/;
-    const cardNumber = element.id.match(regex)[0];
-    try{
-        return parseInt(cardNumber);
-    } catch(error){
-        console.log(`${element.id} did not have a number at the end of its ID`);
-        return null;
+    if(element){
+        const cardNumber = element.id.match(regex)[0];
+        try{
+            return parseInt(cardNumber);
+        } catch(error){
+            console.log(`${element.id} did not have a number at the end of its ID`);
+            return null;
+        }
     }
+    return null;
 }
 
 /**
