@@ -84,20 +84,25 @@ const machiKoroHotkeysMap = {
     },
     "ArrowLeft": {
         description: "Select Left Card",
-        method: () => selectNextCard()
+        method: () => selectCardLeft()
     },
     "ArrowRight": {
         description: "Select Right Card",
-        method: () => selectNextCard()
+        method: () => selectCardRight()
     },
     "ArrowUp": {
         description: "Select Top Card",
-        method: () => selectNextCard()
+        method: () => selectCardUp()
     },
     "ArrowDown": {
         description: "Select Bottom Card",
-        method: () => selectNextCard()
+        method: () => selectCardDown()
+    },
+    "Enter": {
+        description: "Buy Selected Card",
+        method: () => buySelectedCard()
     }
+
 };
 
 /**
@@ -110,7 +115,7 @@ const hotkeysMap = {
 
 setupHotkeys();
 waitForBoardToExistAndThen(addTooltip);
-waitForBoardToExistAndThen(method: ()=> makeActiveBySelector("#card1"));
+waitForBoardToExistAndThen( ()=> makeActiveBySelector("#card1"));
 
 /**
  * Wait for the board DOM element to exist, and then execute the method passed
@@ -203,25 +208,115 @@ function clickBySelector(selector){
 function makeActiveBySelector(selector){
     const element = document.querySelector(selector);
     if(element){
+        const activeElement = document.querySelector( ".selectedCard");
+        // if(activeElement){
+        //     activeElement.classList.remove( "selectedCard" );
+        // }
         element.classList.add("selectedCard");
-        const activeElement = document.querySelector( selectors: ".selectedCard");
-        if(activeElement){
-            activeElement.classList.remove( tokens: "selectedCard" );
-        }
     } else {
         console.log(`Element ${selector} not found`);
     }
 }
 
-function selectNextCard(){
-    makeActiveBySelector("#card1");
-    /*const element = document.querySelector(selector);
-    if(element){
-        element.click();
-    } else {
-        console.log(`Element ${selector} not found`);
-    }*/
+function selectCardRight(){
+    const activeElement = document.querySelector( ".selectedCard");
+    const regex = /\d+$/;
+    const cardNumber = activeElement.id.match(regex)[0];
+    const nextCardNumber = parseInt(cardNumber) + 1;
+
+    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
+    console.log(nextCardDom);
+    if(nextCardDom){
+        const nextCardId = "#card" + nextCardNumber;
+        activeElement.classList.remove( "selectedCard" );
+        document.querySelector(nextCardId).classList.add("selectedCard");
+        console.log(nextCardNumber);
+        console.log(nextCardId);
+    }
+    console.log(cardNumber);
 }
 
+function selectCardLeft(){
+    const activeElement = document.querySelector( ".selectedCard");
+    const regex = /\d+$/;
+    const cardNumber = activeElement.id.match(regex)[0];
+    const nextCardNumber = parseInt(cardNumber) - 1;
 
+    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
+    console.log(nextCardDom);
+    if(nextCardDom){
+        const nextCardId = "#card" + nextCardNumber;
+        activeElement.classList.remove( "selectedCard" );
+        document.querySelector(nextCardId).classList.add("selectedCard");
+        console.log(nextCardNumber);
+        console.log(nextCardId);
+    }
+    console.log(cardNumber);
+}
 
+function selectCardDown(){
+    const activeElement = document.querySelector( ".selectedCard");
+    const regex = /\d+$/;
+    const cardNumber = activeElement.id.match(regex)[0];
+    const nextCardNumber = parseInt(cardNumber) + 5;
+
+    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
+    console.log(nextCardDom);
+    if(nextCardDom){
+        const nextCardId = "#card" + nextCardNumber;
+        activeElement.classList.remove( "selectedCard" );
+        document.querySelector(nextCardId).classList.add("selectedCard");
+        console.log(nextCardNumber);
+        console.log(nextCardId);
+    }
+    console.log(cardNumber);
+}
+
+function selectCardUp(){
+    const activeElement = document.querySelector( ".selectedCard");
+    const regex = /\d+$/;
+    const cardNumber = activeElement.id.match(regex)[0];
+    const nextCardNumber = parseInt(cardNumber) - 5;
+
+    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
+    console.log(nextCardDom);
+    if(nextCardDom){
+        const nextCardId = "#card" + nextCardNumber;
+        activeElement.classList.remove( "selectedCard" );
+        document.querySelector(nextCardId).classList.add("selectedCard");
+        console.log(nextCardNumber);
+        console.log(nextCardId);
+    }
+    console.log(cardNumber);
+}
+
+function buySelectedCard(){
+    const activeElement = document.querySelector( ".selectedCard");
+    console.log("Ok I want to buy " + activeElement.id);
+    if(activeElement){
+        if (activeElement.classList.contains("active"))
+        {
+            console.log("It's active, sure, I'll buy it");
+            activeElement.click();
+            console.log("Click");
+        }
+        else{
+            // auto bvgainei an
+            // 1. den einai available auth
+            // 2. exeis agorasei hdh  ** αν υπαρχει κουμπί αντού "#btn_undo"
+            // 3. den einai h seira sou -- auto isws to lynoyme me to na tsekaroume seira apo prin
+            console.log("Doesn't seem to be available though.");
+            const undoButton = document.querySelector("#btn_undo");
+            if (undoButton){
+                alert("You've already chosen a card.");
+                // an vgaloume to ble otan den einai h seira sou de xreiazetai auto
+                // alla prepei na xanaginetai ble otan einai h seira sou
+            }
+            else{
+                alert("You can't buy this one :( \nChose an available card.");
+            }
+        }        
+    } else {
+        console.log(`Element ${activeElement.id} not found`);
+    }
+}
