@@ -1,7 +1,7 @@
 {
-    "name": "heypano-web-starter-kit",
-    "version": "1.0.1",
-    "description": "Pano's JS (Web Dev) starter kit",
+    "name": "yucata-hotkeys",
+    "version": "1.0.4",
+    "description": "Yucata Hotkeys Extension for chrome",
     "main": "index.js",
     "browserslist": "last 3 versions",
     "config": {
@@ -12,7 +12,7 @@
     },
     "scripts": {
         "clean-dist": "rimraf ./dist && mkdir dist",
-        "prebuild": "npm-run-all clean-dist test",
+        "prebuild": "npm-run-all clean-dist",
         "build": "babel-node buildScripts/build.js",
         "distserver": "babel-node buildScripts/distServer.js",
         "start": "npm-run-all --parallel open:src lint:watch",
@@ -26,7 +26,8 @@
         "lint:watch": "npm run lint -- --watch",
         "generateMockData": "babel-node buildScripts/generateMockData.js",
         "prestart-mockapi": "npm run generateMockData",
-        "start-mockapi": "json-server --watch src/api/db.json --port 3001"
+        "start-mockapi": "json-server --watch src/api/db.json --port 3001",
+        "zip": "cd dist; zip -r -D ../../yukata_hotkeys.zip ./; cd -"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.10.2",
