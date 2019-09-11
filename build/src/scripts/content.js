@@ -3,129 +3,10 @@
  * Keys of the map are the buttons pressed
  * Values of the map are objects describing the action containing a description and a method
  */
-const globalHotkeysMap = {
-    "global_ok": {
-        keyCombos: ["g"],
-        description: "Hit 'OK' when it's your turn",
-        method: () => clickBySelector(".ui-popup-active input[value='OK']")
-    },
-    "global_undo": {
-        keyCombos: ["u"],
-        description: "Hit 'Undo' button",
-        method: () => clickBySelector("#btn_undo")
-    },
-    "global_pass": {
-        keyCombos: ["p"],
-        description: "Hit the 'Pass' button",
-        method: () => clickBySelector("#btn_BtnPassBuy")
-    },
-    "global_finish": {
-        keyCombos: ["f"],
-        description: "Hit the 'Finish Turn' button",
-        method: () => clickBySelector("#btn_finishTurn")
-    },
-    "global_next_game": {
-        keyCombos: ["n"],
-        description: "Hit the 'Next Game' button",
-        method: () => clickBySelector("#btn_nextGame")
-    }
-};
+import {machiKoroHotkeysMap, main as machi_koro_main} from './hotkeys/machi_koro';
+import {globalHotkeysMap} from './hotkeys/global';
+import {waitForBoardToExistAndThen} from "./dom";
 
-/**
- * Hotkey map for machi koro only
- */
-const machiKoroHotkeysMap = {
-    "machi_koro_buy_slot_1": {
-        keyCombos: ["1"],
-        description: "Buy Card in Slot 1 (Machi Koro)",
-        method: () => clickBySelector("#card1")
-    },
-    "machi_koro_buy_slot_2": {
-        keyCombos: ["2"],
-        description: "Buy Card in Slot 2 (Machi Koro)",
-        method: () => clickBySelector("#card2")
-    },
-    "machi_koro_buy_slot_3": {
-        keyCombos: ["3"],
-        description: "Buy Card in Slot 3 (Machi Koro)",
-        method: () => clickBySelector("#card3")
-    },
-    "machi_koro_buy_slot_4": {
-        keyCombos: ["4"],
-        description: "Buy Card in Slot 4 (Machi Koro)",
-        method: () => clickBySelector("#card4")
-    },
-    "machi_koro_buy_slot_5": {
-        keyCombos: ["5"],
-        description: "Buy Card in Slot 5 (Machi Koro)",
-        method: () => clickBySelector("#card5")
-    },
-    "machi_koro_buy_slot_6": {
-        keyCombos: ["6"],
-        description: "Buy Card in Slot 6 (Machi Koro)",
-        method: () => clickBySelector("#card6")
-    },
-    "machi_koro_buy_slot_7": {
-        keyCombos: ["7"],
-        description: "Buy Card in Slot 7 (Machi Koro)",
-        method: () => clickBySelector("#card7")
-    },
-    "machi_koro_buy_slot_8": {
-        keyCombos: ["8"],
-        description: "Buy Card in Slot 8 (Machi Koro)",
-        method: () => clickBySelector("#card8")
-    },
-    "machi_koro_buy_slot_9": {
-        keyCombos: ["9"],
-        description: "Buy Card in Slot 9 (Machi Koro)",
-        method: () => clickBySelector("#card9")
-    },
-    "machi_koro_toggle_dice": {
-        keyCombos: ["d"],
-        description: "Toggle Dice",
-        method: () => clickBySelector("#die2")
-    },
-    "machi_koro_roll_dice": {
-        keyCombos: ["r"],
-        description: "Hit 'Roll dice' button",
-        method: () => clickBySelector("#btn_Würfeln")
-    },
-    "machi_koro_reroll_dice": {
-        keyCombos: ["q"],
-        description: "Hit 'Reroll dice' button",
-        method: () => clickBySelector("#btn_BtnRollAgain")
-    },
-    "machi_koro_do_not_reroll_dice": {
-        keyCombos: ["w"],
-        description: "Hit 'Do Not Reroll' button",
-        method: () => clickBySelector("#btn_BtnRollNotAgain")
-    },
-    "machi_koro_select_card_left": {
-        keyCombos: ["ArrowLeft"],
-        description: "Select Left Card",
-        method: () => selectCardLeft()
-    },
-    "machi_koro_select_card_right": {
-        keyCombos: ["ArrowRight"],
-        description: "Select Right Card",
-        method: () => selectCardRight()
-    },
-    "machi_koro_select_card_up": {
-        keyCombos: ["ArrowUp"],
-        description: "Select Top Card",
-        method: () => selectCardUp()
-    },
-    "machi_koro_select_card_down": {
-        keyCombos: ["ArrowDown"],
-        description: "Select Bottom Card",
-        method: () => selectCardDown()
-    },
-    "machi_koro_buy_selected_card": {
-        keyCombos: ["Enter"],
-        description: "Buy Selected Card",
-        method: () => buySelectedCard()
-    }
-};
 
 /**
  * All of the hotkeys combined
@@ -137,22 +18,8 @@ const hotkeysMap = {
 
 setupHotkeys();
 waitForBoardToExistAndThen(addTooltip);
-waitForBoardToExistAndThen(()=> makeActiveBySelector("#card1"));
+machi_koro_main();
 
-/**
- * Wait for the board DOM element to exist, and then execute the method passed
- * @param {function} method
- */
-function waitForBoardToExistAndThen(method){
-    const board = document.getElementById("board");
-    if(board){
-        console.log("Board is ready.");
-        method();
-    } else {
-        console.log("No board yet, waiting.");
-        setTimeout(waitForBoardToExistAndThen.bind(this, method), 500);
-    }
-}
 
 /**
  * Add a tooltip to the UI containing the shortcuts
@@ -168,13 +35,13 @@ function addTooltip(){
     });
 
     Object.keys(hotkeysMap).forEach(key => {
-       const {description} = hotkeysMap[key];
+       const {keyCombos, description} = hotkeysMap[key];
        const row = Object.assign(document.createElement("div"), {
            className: "tooltipTextRow"
        });
        const labelCell = Object.assign(document.createElement("div"), {
            className: "tooltipTextlabel",
-           textContent: key.toLocaleUpperCase() + ":"
+           textContent: keyCombos[0].toLocaleUpperCase() + ":"
        });
        const valueCell = Object.assign(document.createElement("div"), {
            className: "tooltipTextValue",
@@ -217,140 +84,9 @@ function setupHotkeys(){
     });
 }
 
-/**
- * Click the element in the selector if it is found
- * @param {string} selector
- */
-function clickBySelector(selector){
-    const element = document.querySelector(selector);
-    if(element){
-        element.click();
-    } else {
-        console.log(`Element ${selector} not found`);
-    }
-}
-
-/**
- * Add the "selectedCard" class to the element matched by the selector (if any)
- * @param {string} selector
- */
-function makeActiveBySelector(selector){
-    const element = document.querySelector(selector);
-    if(element){
-        element.classList.add("selectedCard");
-        const activeElement = document.querySelector( ".selectedCard");
-        // if(activeElement){
-        //     activeElement.classList.remove("selectedCard" );
-        // }
-    } else {
-        console.log(`Element ${selector} not found`);
-    }
-}
 
 
 
-function selectCardRight(){
-    const activeElement = document.querySelector( ".selectedCard");
-    const regex = /\d+$/;
-    const cardNumber = activeElement.id.match(regex)[0];
-    const nextCardNumber = parseInt(cardNumber) + 1;
-
-    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
-    console.log(nextCardDom);
-    if(nextCardDom){
-        const nextCardId = "#card" + nextCardNumber;
-        activeElement.classList.remove( "selectedCard" );
-        document.querySelector(nextCardId).classList.add("selectedCard");
-        console.log(nextCardNumber);
-        console.log(nextCardId);
-    }
-    console.log(cardNumber);
-}
-
-function selectCardLeft(){
-    const activeElement = document.querySelector( ".selectedCard");
-    const regex = /\d+$/;
-    const cardNumber = activeElement.id.match(regex)[0];
-    const nextCardNumber = parseInt(cardNumber) - 1;
-
-    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
-    console.log(nextCardDom);
-    if(nextCardDom){
-        const nextCardId = "#card" + nextCardNumber;
-        activeElement.classList.remove( "selectedCard" );
-        document.querySelector(nextCardId).classList.add("selectedCard");
-        console.log(nextCardNumber);
-        console.log(nextCardId);
-    }
-    console.log(cardNumber);
-}
-
-function selectCardDown(){
-    const activeElement = document.querySelector( ".selectedCard");
-    const regex = /\d+$/;
-    const cardNumber = activeElement.id.match(regex)[0];
-    const nextCardNumber = parseInt(cardNumber) + 5;
-
-    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
-    console.log(nextCardDom);
-    if(nextCardDom){
-        const nextCardId = "#card" + nextCardNumber;
-        activeElement.classList.remove( "selectedCard" );
-        document.querySelector(nextCardId).classList.add("selectedCard");
-        console.log(nextCardNumber);
-        console.log(nextCardId);
-    }
-    console.log(cardNumber);
-}
-
-function selectCardUp(){
-    const activeElement = document.querySelector( ".selectedCard");
-    const regex = /\d+$/;
-    const cardNumber = activeElement.id.match(regex)[0];
-    const nextCardNumber = parseInt(cardNumber) - 5;
-
-    const nextCardDom = document.querySelector(`#card${nextCardNumber}`);
-    console.log(nextCardDom);
-    if(nextCardDom){
-        const nextCardId = "#card" + nextCardNumber;
-        activeElement.classList.remove( "selectedCard" );
-        document.querySelector(nextCardId).classList.add("selectedCard");
-        console.log(nextCardNumber);
-        console.log(nextCardId);
-    }
-    console.log(cardNumber);
-}
-
-function buySelectedCard(){
-    const activeElement = document.querySelector( ".selectedCard");
-    console.log("Ok I want to buy " + activeElement.id);
-    if(activeElement){
-        if (activeElement.classList.contains("active"))
-        {
-            console.log("It's active, sure, I'll buy it");
-            activeElement.click();
-            console.log("Click");
-        }
-        else{
-            // auto bvgainei an
-            // 1. den einai available auth
-            // 2. exeis agorasei hdh  ** αν υπαρχει κουμπί αντού "#btn_undo"
-            // 3. den einai h seira sou -- auto isws to lynoyme me to na tsekaroume seira apo prin
-            console.log("Doesn't seem to be available though.");
-            const undoButton = document.querySelector("#btn_undo");
-            if (undoButton){
-                alert("You've already chosen a card.");
-                // an vgaloume to ble otan den einai h seira sou de xreiazetai auto
-                // alla prepei na xanaginetai ble otan einai h seira sou
-            }
-            else{
-                alert("You can't buy this one :( \nChose an available card.");
-            }
-        }
-    } else {
-        console.log(`Element ${activeElement.id} not found`);
-    }
-}
 
 
 
