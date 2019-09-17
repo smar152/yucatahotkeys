@@ -67,19 +67,16 @@ function setupHotkeys(){
     Object.keys(hotkeysMap).forEach(actionId => {
         // Get the data object
         const data = hotkeysMap[actionId];
+      
         if(data){
             const {keyCombos, method, description} = data;
             keyCombos.forEach(key => {
-                // Attach an keypress event listener to the window object
-                window.addEventListener("keydown", (e) => {
-                    // If the key in the event matches the key we are setting up the handler for
-                    if(e.key === key){
-                        // If we have a binding for this hotkey
-                        console.log(`Action: ${description}`);
-                        method();
-                    }
+                const keyMethod = method;
+                hotkeys(key, function(){ 
+                    console.log(`Action: ${description}`);
+                        keyMethod();
                 });
-            });
+            });        
         }
     });
 }

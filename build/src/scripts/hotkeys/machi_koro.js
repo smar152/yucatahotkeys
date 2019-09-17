@@ -1,5 +1,6 @@
 import '../../scss/machi_koro.scss';
 import {clickBySelector, waitForBoardToExistAndThen} from "../dom";
+import hotkeys from 'hotkeys-js';
 
 /**
  * Main method to be executed (by content.js)
@@ -7,7 +8,22 @@ import {clickBySelector, waitForBoardToExistAndThen} from "../dom";
 export function main(){
     waitForBoardToExistAndThen(()=> selectCardBySelector("#card1"));
     waitForBoardToExistAndThen(addCardTooltips);
+
+    hotkeys('ctrl+a,ctrl+b,r,f', function (event, handler){
+        switch (handler.key) {
+          case 'ctrl+a': alert('you pressed ctrl+a!');
+            break;
+          case 'ctrl+b': alert('you pressed ctrl+b!');
+            break;
+          case 'r': alert('you pressed r!');
+            break;
+          case 'f': alert('you pressed f!');
+            break;
+          default: alert(event);
+        }
+      });
 }
+
 
 /**
  * Hotkey map for machi koro only
@@ -79,22 +95,22 @@ export const machiKoroHotkeysMap = {
         method: () => clickBySelector("#btn_BtnRollNotAgain")
     },
     "machi_koro_select_card_left": {
-        keyCombos: ["ArrowLeft"],
+        keyCombos: ["left"],
         description: "Select Left Card",
         method: () => selectCardLeft()
     },
     "machi_koro_select_card_right": {
-        keyCombos: ["ArrowRight"],
+        keyCombos: ["right"],
         description: "Select Right Card",
         method: () => selectCardRight()
     },
     "machi_koro_select_card_up": {
-        keyCombos: ["ArrowUp"],
+        keyCombos: ["up"],
         description: "Select Top Card",
         method: () => selectCardUp()
     },
     "machi_koro_select_card_down": {
-        keyCombos: ["ArrowDown"],
+        keyCombos: ["down"],
         description: "Select Bottom Card",
         method: () => selectCardDown()
     },
@@ -230,13 +246,12 @@ export function buySelectedCard(){
             console.log("Click");
         }
         else{
-            // auto bvgainei an
-            // 1. den einai available auth
-            // 2. exeis agorasei hdh  ** αν υπαρχει κουμπί αντού "#btn_undo"
-            // 3. den einai h seira sou -- auto isws to lynoyme me to na tsekaroume seira apo prin
+            // An den einai available auth
+            // An den einai h seira sou -- auto isws to lynoyme me to na tsekaroume seira apo prin
             console.log("Doesn't seem to be available though.");
             const undoButton = document.querySelector("#btn_undo");
             if (undoButton){
+                // An exeis agorasei hdh
                 alert("You've already chosen a card.");
                 // an vgaloume to ble otan den einai h seira sou de xreiazetai auto
                 // alla prepei na xanaginetai ble otan einai h seira sou
