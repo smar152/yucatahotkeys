@@ -7,7 +7,7 @@ import {clickBySelector, waitForBoardToExistAndThen} from "../dom";
 export function main(){
     waitForBoardToExistAndThen(()=> selectCardBySelector("#card1"));
     waitForBoardToExistAndThen(addCardTooltips);
-
+}
 /**
  * Hotkey map for machi koro only
  */
