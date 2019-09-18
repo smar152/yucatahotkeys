@@ -1,6 +1,5 @@
 import '../../scss/machi_koro.scss';
 import {clickBySelector, waitForBoardToExistAndThen} from "../dom";
-import hotkeys from 'hotkeys-js';
 
 /**
  * Main method to be executed (by content.js)
@@ -8,22 +7,6 @@ import hotkeys from 'hotkeys-js';
 export function main(){
     waitForBoardToExistAndThen(()=> selectCardBySelector("#card1"));
     waitForBoardToExistAndThen(addCardTooltips);
-
-    hotkeys('ctrl+a,ctrl+b,r,f', function (event, handler){
-        switch (handler.key) {
-          case 'ctrl+a': alert('you pressed ctrl+a!');
-            break;
-          case 'ctrl+b': alert('you pressed ctrl+b!');
-            break;
-          case 'r': alert('you pressed r!');
-            break;
-          case 'f': alert('you pressed f!');
-            break;
-          default: alert(event);
-        }
-      });
-}
-
 
 /**
  * Hotkey map for machi koro only
