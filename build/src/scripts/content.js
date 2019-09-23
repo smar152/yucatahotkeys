@@ -6,6 +6,7 @@
 import {machiKoroHotkeysMap, main as machi_koro_main} from './hotkeys/machi_koro';
 import {globalHotkeysMap} from './hotkeys/global';
 import {waitForBoardToExistAndThen} from "./dom";
+import hotkeys from 'hotkeys-js';
 
 
 /**
