@@ -1,6 +1,6 @@
 {
     "name": "yucata-hotkeys",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "description": "Yucata Hotkeys Extension for chrome",
     "main": "index.js",
     "browserslist": "last 3 versions",
