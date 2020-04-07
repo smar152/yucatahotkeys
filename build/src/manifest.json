@@ -1,6 +1,6 @@
 {
   "name": "Yucata Hotkeys",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Keyboard shortcuts for yucata games",
   "manifest_version": 2,
   "permissions": ["activeTab", "declarativeContent", "storage"],
@@ -9,13 +9,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://yucata.de/*"],
+      "matches": ["*://*.yucata.de/*"],
       "css": ["css/injected.css"],
       "js": ["scripts/content.js"],
       "run_at": "document_end"
     },
     {
-      "matches": ["*://yucata.de/en/Game/MachiKoro/*"],
+      "matches": ["*://*.yucata.de/en/Game/MachiKoro/*"],
       "css": ["css/machi_koro.css"]
     }
   ],

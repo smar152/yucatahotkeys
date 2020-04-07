@@ -68,16 +68,15 @@ function setupHotkeys(){
     Object.keys(hotkeysMap).forEach(actionId => {
         // Get the data object
         const data = hotkeysMap[actionId];
-      
         if(data){
             const {keyCombos, method, description} = data;
             keyCombos.forEach(key => {
                 const keyMethod = method;
-                hotkeys(key, function(){ 
+                hotkeys(key, function(){
                     console.log(`Action: ${description}`);
                         keyMethod();
                 });
-            });        
+            });
         }
     });
 }
